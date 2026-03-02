@@ -93,7 +93,7 @@ img {
     flex-direction: row;
     width: 100vw;
     gap: 68px;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     height: 200px;
   }
