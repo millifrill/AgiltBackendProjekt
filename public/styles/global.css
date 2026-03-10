@@ -199,6 +199,11 @@ a.button {
   font-size: 14px;
   font-weight: 300;
 }
+.info-message {
+  color: rgb(0, 54, 0);
+  font-size: 14px;
+  font-weight: 300;
+}
 
 .checkbox:checked {
   accent-color: var(--primary);

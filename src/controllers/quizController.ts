@@ -151,3 +151,23 @@ export async function updateQuiz(req: Request, res: Response) {
     return res.status(500).json({ error: 'Failed to update quiz' });
   }
 }
+
+export async function getQuizByCollection(req: Request, res: Response) {
+  const { collection } = req.params;
+
+  try {
+    const [results] = await db.query<Quiz[]>(
+      'SELECT * FROM quiz WHERE collectionId = ?',
+      [collection],
+    );
+    if (results.length === 0) {
+      return res
+        .status(404)
+        .json({ error: 'No quiz with this collection found' });
+    }
+    res.json(results);
+  } catch (err) {
+    console.error('Error fetching quizzes:', err);
+    return res.status(500).json({ error: 'Failed to fetch collection' });
+  }
+}

@@ -27,7 +27,7 @@ export async function createCollection(req: Request, res: Response) {
     !collectionName ||
     !collectionType ||
     !collectionCategory ||
-    !sharedCollection ||
+    !sharedCollection === undefined ||
     !createdBy
   ) {
     return res.status(400).json({
@@ -118,7 +118,7 @@ export async function updateCollection(req: Request, res: Response) {
     !collectionName ||
     !collectionType ||
     !collectionCategory ||
-    !sharedCollection
+    !sharedCollection === undefined
   ) {
     return res.status(400).json({
       error: 'collection name, type, category, and shared status required',

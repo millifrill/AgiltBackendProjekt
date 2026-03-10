@@ -15,20 +15,25 @@
   <body>
     <header id="headerContainer"></header>
     <main>
-      <h2>Skapa quiz samling</h2>
+      <div class="create-quiz-container">
+        <h2>Skapa quiz samling</h2>
 
-      <div>
         <div class="collection-info">
-          <div class="svg-select-container">
-            <button title="Ändra kategori" class="svg-select-button"></button>
-            <div class="svgOptions"></div>
-          </div>
-          <div>
-            <input
-              class="collection-name-textbox"
-              type="text"
-              placeholder="Samlingsnamn"
-            />
+          <div class="section1">
+            <div class="svg-select-container">
+              <button
+                title="Ändra kategori"
+                class="svg-select-button input"
+              ></button>
+              <div class="svgOptions"></div>
+            </div>
+            <div>
+              <input
+                class="collection-name-textbox input"
+                type="text"
+                placeholder="Samlingsnamn"
+              />
+            </div>
           </div>
           <button
             title="Lägg till ny samnling"
@@ -50,51 +55,69 @@
             </svg>
           </button>
         </div>
+        <p class="collection-out info-message"></p>
+
+        <div class="select-collection-info">Välj en samling att redigera</div>
         <select name="Samling" id="Select-Collection">
           <option value="">Välj samling att redigera</option>
         </select>
-        <div>Vald samling</div>
-        <div class="selected-collection">Ingen vald</div>
-        <div class="add-question-text">Lägg till fråga i samling</div>
+        <div class="input-section">
+          <div class="selected-collection-text">Ingen vald</div>
+          <div class="shareQuizCheckbox">
+            <input id="shareCollection" type="checkbox" />
+            <label for="shareColletion">Dela samling</label>
+          </div>
 
-        <div class="card-select">
-          <select class="cardSelect">
-            <option value="10">Test</option>
-          </select>
-        </div>
-        <!-- <div class="shadows">
+          <div class="add-question-text">
+            <div>Lägg till fråga i samling</div>
+            <div>
+              <select class="cardSelect">
+                <option value="10">Test</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- <div class="shadows">
           <div class="shadowbox"></div>
         <div class="shadowboxtwo"></div>
       </div> -->
 
-        <textarea
-          class="question-box"
-          type="text"
-          placeholder="Fråga..."
-        ></textarea>
-        <input
-          id="correctAnswer"
-          class="answer"
-          type="text"
-          placeholder="Rätt svar..."
-        />
-        <input
-          class="answer optionone"
-          type="text"
-          placeholder="Alternativ..."
-        />
-        <input
-          class="answer optiontwo"
-          type="text"
-          placeholder="Alternativ..."
-        />
-        <input
-          class="answer optionthree"
-          type="text"
-          placeholder="Alternativ..."
-        />
-        <button class="addButton button">Lägg till</button>
-        <button class="completeButton button">Slutför Samling</button>
+          <textarea
+            class="question-box textarea"
+            type="text"
+            placeholder="Fråga..."
+          ></textarea>
+          <input
+            id="correctAnswer"
+            class="answer input"
+            type="text"
+            placeholder="Rätt svar..."
+          />
+          <input
+            class="answer input optionone"
+            type="text"
+            placeholder="Alternativ..."
+          />
+          <input
+            class="answer input optiontwo"
+            type="text"
+            placeholder="Alternativ..."
+          />
+          <input
+            class="answer input optionthree"
+            type="text"
+            placeholder="Alternativ..."
+          />
+          <div class="buttons-container">
+            <button class="deleteButton button">Radera fråga</button>
+            <button class="addButton button">Lägg till</button>
+          </div>
+          <div class="quiestions-out">
+            <p class="errorOut error-message"></p>
+            <p class="successOut info-message"></p>
+          </div>
+        </div>
+        <!-- <button class="completeButton button">Slutför Samling</button> -->
       </div>
     </main>
     <footer id="footerContainer"></footer>
