@@ -206,11 +206,10 @@ addButton.addEventListener('click', async () => {
     }
   }
   clearQuizFields();
-  // collectionsOptionInit();
+  setAddEditButton('add');
+  selectedQuizId = null;
   setSuccessMessage('Fråga tillagd!');
-  collectionCards = await getQuizcards(e.target.value);
-  console.log(collectionCards);
-  updateCardSelection();
+  await refreshCardSelection();
 });
 
 deleteButton.addEventListener('click', async () => {
@@ -222,13 +221,28 @@ deleteButton.addEventListener('click', async () => {
     return;
   }
   clearQuizFields();
-  collectionsOptionInit();
+  setAddEditButton('add');
+  selectedQuizId = null;
+  await refreshCardSelection();
   setSuccessMessage('Fråga borttagen!');
 });
 
+async function refreshCardSelection() {
+  if (!inputValues.collectionId) return;
+  collectionQuizzes.innerHTML = '';
+  collectionQuizzes.options[0] = new Option('Ny fråga');
+  collectionCards = await getQuizcards(inputValues.collectionId);
+  console.log(collectionCards);
+  updateCardSelection();
+  collectionQuizzes.value = 'Ny fråga';
+}
+
 function updateCardSelection() {
-  if (collectionCards?.error || collectionCards?.length === 0) {
-    collectionQuizzes.options[0] = new Option('Inga frågor');
+  if (
+    !collectionCards ||
+    collectionCards?.error ||
+    collectionCards?.length === 0
+  ) {
     return;
   }
   try {
