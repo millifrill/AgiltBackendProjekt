@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
 import mysqlpool from '../connectionMysql.ts';
 import type { ResultSetHeader } from 'mysql2';
-const db = mysqlpool;
-
 import type { RowDataPacket } from 'mysql2';
+
+const db = mysqlpool;
 
 interface Collection extends RowDataPacket {
   collectionId: number;
@@ -11,40 +11,22 @@ interface Collection extends RowDataPacket {
   collectionType: string;
   collectionCategory: number;
   sharedCollection: boolean;
-  createdBy: number;
+  createdBy: string;
+  categoryId: number;
 }
 
 export async function createCollection(req: Request, res: Response) {
-  const {
-    collectionName,
-    collectionType,
-    collectionCategory,
-    sharedCollection,
-    createdBy,
-  } = req.body;
+  const { collectionName, sharedCollection, createdBy, categoryId } = req.body;
   let affectedRows: number;
-  if (
-    !collectionName ||
-    !collectionType ||
-    !collectionCategory ||
-    !sharedCollection === undefined ||
-    !createdBy
-  ) {
-    return res.status(400).json({
-      error:
-        'collection name, collection type, collection category, shared status and creator required',
-    });
+  if (!collectionName || !sharedCollection || !createdBy || !categoryId) {
+    return res
+      .status(400)
+      .json({ error: 'collection name, shared status and creator required' });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'INSERT INTO collections (collectionName, collectionType, collectionCategory, sharedCollection, createdBy) VALUES (?,?,?,?,?)',
-      [
-        collectionName,
-        collectionType,
-        collectionCategory,
-        sharedCollection,
-        createdBy,
-      ],
+      'INSERT INTO collections (collectionName, sharedCollection, createdBy, categoryId) VALUES (?,?,?,?)',
+      [collectionName, sharedCollection, createdBy, categoryId],
     );
 
     affectedRows = results.affectedRows;
@@ -57,6 +39,7 @@ export async function createCollection(req: Request, res: Response) {
     affectedRows,
   });
 }
+
 export async function getCollections(_req: Request, res: Response) {
   try {
     const [results] = await db.query<Collection[]>('SELECT * FROM collections');
@@ -108,32 +91,14 @@ export async function getCollectionById(req: Request, res: Response) {
 
 export async function updateCollection(req: Request, res: Response) {
   const { id } = req.params;
-  const {
-    collectionName,
-    collectionType,
-    collectionCategory,
-    sharedCollection,
-  } = req.body;
-  if (
-    !collectionName ||
-    !collectionType ||
-    !collectionCategory ||
-    !sharedCollection === undefined
-  ) {
-    return res.status(400).json({
-      error: 'collection name, type, category, and shared status required',
-    });
+  const { collectionName, sharedCollection, categoryId } = req.body;
+  if (!collectionName) {
+    return res.status(400).json({ error: 'collection name required' });
   }
   try {
     const [results] = await db.query<ResultSetHeader>(
-      'UPDATE collections SET collectionName = ?, collectionType = ?, collectionCategory = ?, sharedCollection = ? WHERE collectionId = ?',
-      [
-        collectionName,
-        collectionType,
-        collectionCategory,
-        sharedCollection,
-        id,
-      ],
+      'UPDATE collections SET collectionName = ?, sharedCollection = ?,categoryId = ? WHERE collectionId = ?',
+      [collectionName, sharedCollection, categoryId, id],
     );
     if (results.affectedRows === 0) {
       res
