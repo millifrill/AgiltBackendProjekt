@@ -21,16 +21,18 @@ VALUES('Historia'),
 CREATE TABLE collections(
     collectionId INT NOT NULL AUTO_INCREMENT,
     collectionName VARCHAR(50) NOT NULL,
+    collectionType VARCHAR(10) NOT NULL,
+    collectionCategory INT NOT NULL,
     sharedCollection BOOLEAN DEFAULT FALSE,
-    createdBy VARCHAR(50) NOT NULL,
+    createdBy INT NOT NULL,
     PRIMARY KEY (collectionId)
 );
 
-INSERT INTO collections(collectionName, createdBy, sharedCollection)
-VALUES('Min collection 1','Me', 0),
-('Min collection 2','me', 1),
-('Min collection 3','meeee', 1),
-('Min collection 4','meee2', 0);
+INSERT INTO collections(collectionName,collectionType, collectionCategory, createdBy, sharedCollection)
+VALUES('Min collection 1','flash',2,1,0 ),
+('Min collection 2','flash',1,1, 1),
+('Min collection 3','quiz',4,1, 1),
+('Min collection 4','quiz',2,1,0);
 
 CREATE TABLE flashcard(
     collectionId INT,
@@ -72,7 +74,11 @@ VALUES(
        'hur många laxar?', '6', '5', '12','annat',1, 5),
     ('hur många Sjömän?', '7', '5', '12','annat',1, 1),
     ('Hur många kalorier i ett glas vatten?', '0', '5','annat', '12',1, 5),
-    ('hur många ben har en tusenfoting?', 'vet ej', '1000', '12 000','annat',1, 5
+    ('hur många ben har en tusenfoting?', 'vet ej', '1000', '12 000','annat',1, 5),
+    ('hur många laxar?', '6', '5', '12','annat',3, 3),
+    ('hur många Sjömän?', '7', '5', '12','annat',3, 3),
+    ('Hur många kalorier i ett glas vatten?', '0', '5','annat', '12',3, 3),
+    ('hur många ben har en tusenfoting?', 'vet ej', '1000', '12 000','annat',3, 3
       );
 
 CREATE TABLE ratings(

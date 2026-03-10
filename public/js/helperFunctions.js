@@ -126,7 +126,7 @@ export async function addNewCollection(data) {
         collectionType: 'quiz',
         collectionCategory: 1,
         sharedCollection: data.sharedCollection,
-        createdBy: 'the best person',
+        createdBy: data.createdBy,
       }),
     });
     if (response) {

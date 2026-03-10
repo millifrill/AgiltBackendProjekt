@@ -11,7 +11,7 @@ interface Collection extends RowDataPacket {
   collectionType: string;
   collectionCategory: number;
   sharedCollection: boolean;
-  createdBy: string;
+  createdBy: number;
 }
 
 export async function createCollection(req: Request, res: Response) {

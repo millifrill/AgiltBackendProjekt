@@ -64,7 +64,7 @@ let inputValues = {
 let collectionCards;
 let selectedCollectionName;
 let collections;
-let userName = 'Meee';
+let user = 1;
 let submitType = 'add';
 
 updateSvg();
@@ -80,7 +80,7 @@ createCollectionButton.addEventListener('click', async () => {
     collectionName: inputValues.collectionName,
     collectionType: 'quiz',
     sharedCollection: false,
-    createdBy: userName,
+    createdBy: user,
   });
   svgOptions.classList.remove('active');
   collectionName.value = '';
