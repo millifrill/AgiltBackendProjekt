@@ -10,6 +10,13 @@ interface User {
   userPassword: string;
 }
 
+interface UpdatedUser {
+  userId?: string;
+  username?: string;
+  userEmail?: string;
+  userPassword?: string;
+}
+
 export const getUsers = async (_req: Request, res: Response) => {
   const results = await mongoDatabase
     .collection<User>('users')
@@ -119,15 +126,31 @@ export const updateUser = async (
     { id: ObjectId },
     { success?: boolean; error?: string },
     {
-      username: string;
-      userEmail: string;
-      userPassword: string;
+      username?: string;
+      userEmail?: string;
+      userPassword?: string;
     },
     void
   >,
   res: Response,
 ) => {
   const { username, userEmail, userPassword } = req.body;
+  const updatedUser: UpdatedUser = {};
+  console.log('updatedUser', updatedUser);
+
+  if (username) {
+    updatedUser.username = username;
+  }
+
+  if (userEmail) {
+    updatedUser.userEmail = userEmail;
+  }
+
+  if (userPassword) {
+    const hashedPassword = await bcrypt.hash(userPassword, 10);
+    updatedUser.userPassword = hashedPassword;
+  }
+
   try {
     const result = await mongoDatabase
       .collection<OptionalId<User>>('users')
@@ -136,11 +159,7 @@ export const updateUser = async (
           _id: new ObjectId(req.params.id),
         },
         {
-          $set: {
-            username: username,
-            userEmail: userEmail,
-            userPassword: userPassword,
-          },
+          $set: updatedUser,
         },
       );
     if (result.matchedCount === 0)
