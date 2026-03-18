@@ -16,7 +16,7 @@ const saveFlashcardBtn = document.querySelector('.save-flashcard-btn');
 
 function openAccordion(event) {
   event.currentTarget.classList.toggle('active');
-  let panel = event.currentTarget.nextElementSibling;
+  const panel = event.currentTarget.nextElementSibling;
   if (panel.style.display === 'block') {
     panel.style.display = 'none';
   } else {
