@@ -41,6 +41,34 @@ export const getFlashcardById = async (
   }
 };
 
+export async function getFlashcardByCollection(
+  req: Request<
+    { collectionId: number },
+    { message: string; success: boolean; error: string },
+    void,
+    void
+  >,
+  res: Response,
+) {
+  const { collectionId } = req.params;
+
+  try {
+    const [results] = await mysqlDatabase.query<Flashcard[]>(
+      'SELECT * FROM flashcard WHERE collectionId = ?',
+      [collectionId],
+    );
+    if (results.length === 0) {
+      return res
+        .status(404)
+        .json({ error: 'No flashcard with this collection found' });
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    console.error('Error fetching flashcards:', err);
+    return res.status(500).json({ error: 'Failed to fetch collection' });
+  }
+}
+
 export const createFlashcard = async (
   req: Request<
     void,
