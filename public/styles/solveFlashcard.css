@@ -9,6 +9,12 @@
   --radius: 8px;
 }
 
+#active-question {
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+}
+
 .card {
   min-height: 200px;
   height: auto;

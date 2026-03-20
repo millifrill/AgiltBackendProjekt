@@ -1,6 +1,7 @@
 let params = new URLSearchParams(document.location.search);
 const collectionId = params.get('id');
 console.log('collectionId from url ', collectionId);
+const activeQuestion = document.querySelector('#active-question');
 const flashcardCard = document.querySelector('.card');
 const knowQuestionOrWrongAnswerButton = document.querySelector('.know');
 const guessQuestionOrRightAnswerButton = document.querySelector('.guess');
@@ -47,6 +48,7 @@ function renderQuestions() {
   }
   if (currentQuestion < data.length || currentAnswer < data.length) {
     if (state.isQuestion) {
+      activeQuestion.textContent = `Fråga ${currentQuestion + 1} av ${data.length}`;
       flashcardCard.textContent = data[currentQuestion].flashcardQuestion;
       console.log('state.isQuestion flashcardQuestion ', state.isQuestion);
       document.querySelector('.know').textContent = 'Jag vet';
