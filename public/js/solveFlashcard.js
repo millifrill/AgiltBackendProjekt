@@ -36,13 +36,20 @@ getFlashcards();
 
 function renderQuestions() {
   if (currentAnswer >= data.length) {
+    activeQuestion.textContent = '';
     flashcardCard.innerHTML = `<img src="./img/celebration.png" alt="Pokal"/>`;
     buttons.innerHTML = '';
+    buttons.classList.add('column-buttons');
     const resultButton = document.createElement('a');
     resultButton.textContent = 'Se resultat';
     resultButton.classList.add('button', 'result');
     resultButton.setAttribute('href', '/public/flashcardResults.html');
+    const startpageButton = document.createElement('a');
+    startpageButton.textContent = 'Tillbaka till startsidan';
+    startpageButton.classList.add('button', 'result');
+    startpageButton.setAttribute('href', '/public/index.html');
     buttons.appendChild(resultButton);
+    buttons.appendChild(startpageButton);
 
     return;
   }
