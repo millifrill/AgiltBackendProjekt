@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  height: 500px;
+  /* height: 500px; */
 }
 #resultCelebration img {
   width: 100%;

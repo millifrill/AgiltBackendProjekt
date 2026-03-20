@@ -53,7 +53,7 @@ const deleteButton = document.querySelector('.deleteButton');
 let collectionCards;
 let selectedCollectionName;
 let collections;
-let user = 1;
+let user = JSON.parse(localStorage.getItem('userId'));
 let submitType = 'add';
 let selectedQuizId;
 

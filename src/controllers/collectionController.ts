@@ -161,3 +161,18 @@ export async function getCollectionByType(req: Request, res: Response) {
   }
   res.status(201).json({ message: 'getCollectionByType was run', returnData });
 }
+
+export async function getCollectionByUserId(req: Request, res: Response) {
+  const { id } = req.params;
+  let returnData;
+  try {
+    const [results] = await db.query<Collection[]>(
+      'SELECT * FROM collections WHERE createdBy = ?',
+      [id],
+    );
+    returnData = results;
+  } catch (err) {
+    console.error('There was an error getting the collection', err);
+  }
+  res.status(201).json({ message: 'getCollectionById was run', returnData });
+}

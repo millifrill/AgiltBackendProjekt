@@ -192,6 +192,19 @@ export async function getCollections(type) {
   }
 }
 
+export async function getUserCollections(id) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/collectionUser/${id}`);
+
+    const data = await res.json();
+    console.log(data.returnData);
+
+    return data.returnData;
+  } catch (err) {
+    console.error('failed to fetch collections', err);
+  }
+}
+
 export async function getQuizcards(data) {
   console.log('data in get quizcards: ', data);
   if (!data.collectionId) return;
