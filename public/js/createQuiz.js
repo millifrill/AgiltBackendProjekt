@@ -1,7 +1,7 @@
 import {
   appState,
   findId,
-  getCollections,
+  getTypeUserCollections,
   getQuizcards,
   addNewQuiz,
   addNewCollection,
@@ -13,6 +13,8 @@ import {
   updateQuiz,
   updateCollection,
 } from './helperFunctions.js';
+
+let userId = JSON.parse(localStorage.getItem('userId'));
 
 const pageState = {
   selectedCategory: localStorage.getItem('selectedCategory'),
@@ -53,7 +55,7 @@ const deleteButton = document.querySelector('.deleteButton');
 let collectionCards;
 let selectedCollectionName;
 let collections;
-let user = JSON.parse(localStorage.getItem('userId'));
+
 let submitType = 'add';
 let selectedQuizId;
 
@@ -69,7 +71,7 @@ let inputValues = {
   quizAnswer2: '',
   quizAnswer3: '',
   categoryId: null,
-  createdBy: user,
+  createdBy: userId,
 };
 
 updateSvg();
@@ -77,7 +79,7 @@ collectionsOptionInit('init');
 
 async function collectionsOptionInit() {
   collectionsSelect.innerHTML = '';
-  collections = await getCollections('quiz');
+  collections = await getTypeUserCollections({ userId: userId, type: 'quiz' });
   if (collections) {
     const option = document.createElement('option');
     option.value = 'Välj samling';
@@ -120,7 +122,7 @@ createCollectionButton.addEventListener('click', async () => {
     collectionType: inputValues.collectionType,
     collectionCategory: inputValues.categoryId,
     sharedCollection: false,
-    createdBy: user,
+    createdBy: userId,
   });
   if (response.error) {
     setCollectionInfo(response.error, 1);

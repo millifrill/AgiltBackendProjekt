@@ -1,4 +1,4 @@
-import { getUserCollections, appState } from './helperFunctions.js';
+import { getTypeUserCollections, appState } from './helperFunctions.js';
 
 const categories = {
   1: 'History',
@@ -11,6 +11,8 @@ const categories = {
   8: 'Physics',
 };
 
+const type = 'quiz';
+
 const userId = JSON.parse(localStorage.getItem('userId'));
 
 const quizContainer = document.getElementById('quizContainer');
@@ -20,7 +22,7 @@ console.log(appState);
 
 async function collectionsOptionInit() {
   quizContainer.innerHTML = '';
-  collections = await getUserCollections(userId);
+  collections = await getTypeUserCollections({ userId: userId, type: type });
   console.log(collections);
   if (collections) {
     for (const collection of collections) {

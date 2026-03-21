@@ -162,13 +162,14 @@ export async function getCollectionByType(req: Request, res: Response) {
   res.status(201).json({ message: 'getCollectionByType was run', returnData });
 }
 
-export async function getCollectionByUserId(req: Request, res: Response) {
-  const { id } = req.params;
+export async function getCollectionByTypeUserId(req: Request, res: Response) {
+  const { id, type } = req.body;
+
   let returnData;
   try {
     const [results] = await db.query<Collection[]>(
-      'SELECT * FROM collections WHERE createdBy = ?',
-      [id],
+      'SELECT * FROM collections WHERE createdBy = ? AND collectionType = ?',
+      [id, type],
     );
     returnData = results;
   } catch (err) {

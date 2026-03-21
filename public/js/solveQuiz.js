@@ -11,14 +11,13 @@ next.disabled = true;
 const info = document.querySelector('.info');
 // console.log(quizId);
 let index = 0;
-S;
 let activeQuiz = {};
 init();
 
 async function init() {
   activeQuiz = await getQuizcards({ collectionId: quizId });
 
-  if (!activeQuiz[1]) {
+  if (!activeQuiz[0]) {
     quizContainer.innerHTML = 'Denna samling har inga quiz';
   } else {
     listQuestions();
