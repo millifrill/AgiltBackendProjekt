@@ -7,6 +7,7 @@ import {
   getCollections,
   updateCollection,
   getCollectionByType,
+  getCollectionByTypeUserId,
 } from '../controllers/collectionController.ts';
 
 const router = express.Router();
@@ -17,5 +18,5 @@ router.delete('/collections/:id', deleteCollection);
 router.get('/collections/:id', getCollectionById);
 router.put('/collections/:id', updateCollection);
 router.get('/collectionType/:type', getCollectionByType);
-
+router.post('/collectionTypeUser', getCollectionByTypeUserId);
 export default router;
