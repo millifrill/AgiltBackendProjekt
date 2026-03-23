@@ -4,7 +4,7 @@ const username = getUsername!.charAt(0).toUpperCase() + getUsername!.slice(1);
 
 document.querySelector('#username')!.textContent = ` ${username}!`;
 
-const solveQuizButton = document.querySelector('.solve-quiz') as HTMLElement;
+const solveQuizButton = document.querySelector<HTMLElement>('.solve-quiz');
 
 function clearLocaleStorage() {
   localStorage.removeItem('correctAnswersCount');
@@ -12,4 +12,4 @@ function clearLocaleStorage() {
   localStorage.removeItem('knowAnswersCount');
   localStorage.removeItem('guessAnswersCount');
 }
-solveQuizButton.addEventListener('click', clearLocaleStorage);
+solveQuizButton!.addEventListener('click', clearLocaleStorage);
