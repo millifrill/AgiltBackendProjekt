@@ -271,27 +271,31 @@ export function validateUserInput({
   userPassword2,
   errorMessage,
 }) {
-  if (username) {
-    if (username.length < 2) {
-      errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
-      return false;
-    }
-    if (username.length > 20) {
-      errorMessage.textContent =
-        'Användarnamnet får inte vara mer än 20 karaktärer';
-      return false;
-    }
+  if (username === '') {
+    errorMessage.textContent = 'Användarnamn krävs';
+    return false;
+  }
+  if (username.length < 2) {
+    errorMessage.textContent = 'Användarnamnet måste vara minst 2 karaktärer';
+    return false;
+  }
+  if (username.length > 20) {
+    errorMessage.textContent =
+      'Användarnamnet får inte vara mer än 20 karaktärer';
+    return false;
   }
 
-  if (userEmail) {
-    if (!userEmail.includes('.')) {
-      errorMessage.textContent = 'Email behöver innehålla .';
-      return false;
-    }
-    if (!userEmail.includes('@')) {
-      errorMessage.textContent = 'Email behöver innehålla @';
-      return false;
-    }
+  if (userEmail === '') {
+    errorMessage.textContent = 'Email krävs';
+    return false;
+  }
+  if (!userEmail.includes('@')) {
+    errorMessage.textContent = 'Email behöver innehålla @';
+    return false;
+  }
+  if (!userEmail.includes('.')) {
+    errorMessage.textContent = 'Email behöver innehålla .';
+    return false;
   }
 
   if (currentPassword) {
