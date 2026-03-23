@@ -12,7 +12,9 @@ async function collectionsOptionInit(): Promise<void> {
       console.log('collection', collection);
       const collectionButton = document.createElement('a');
       collectionButton.type = 'button';
-      collectionButton.innerHTML = collection.collectionName;
+      collectionButton.innerHTML =
+        collection.collectionName.charAt(0).toUpperCase() +
+        collection.collectionName.slice(1);
       collectionButton.classList.add('white-button');
       collectionButton.style.width = '100%';
       collectionButton.href = `./solveFlashcard.html?id=${collection.collectionId}`;
