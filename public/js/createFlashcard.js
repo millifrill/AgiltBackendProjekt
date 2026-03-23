@@ -11,6 +11,7 @@ const saveFlashcardBtn = document.querySelector('.save-flashcard-btn');
 const addIconSubmitDiv = document.querySelector('.add-icon-div');
 const addFlashcard = document.querySelector('.add-flashcard');
 const errorMessage = document.querySelector('.error-message');
+const infoMessage = document.querySelector('.info-message');
 let collections;
 let selectedCollection;
 
@@ -54,7 +55,7 @@ for (i = 0; i < accordion.length; i++) {
 
 async function createFlashcardCollection(event) {
   event.preventDefault();
-  const collectionName = inputCollectionName.value.trim().toLocaleLowerCase();
+  const collectionName = inputCollectionName.value.trim();
   const sharedCollection = checkboxSharedCollection.checked;
   const createdBy = JSON.parse(localStorage.getItem('userId'));
   const categoryId = Number(inputCategory.value);
@@ -81,6 +82,7 @@ async function createFlashcardCollection(event) {
     localStorage.setItem('sharedCollection', JSON.stringify(sharedCollection));
     localStorage.setItem('createdBy', JSON.stringify(createdBy));
     localStorage.setItem('categoryId', JSON.stringify(categoryId));
+    infoMessage.textContent = 'Samling skapad';
   } catch (err) {
     console.error('Error creating collection', err);
   }
@@ -213,6 +215,7 @@ function addFlashcardAccordion(event) {
 addFlashcard.addEventListener('click', addFlashcardAccordion);
 
 async function saveFlashcard(event) {
+  errorMessage.textContent = '';
   const target = event.target;
   console.log('target save flashcard', target);
   const clostestCard = target.closest('.card');
@@ -239,6 +242,7 @@ async function saveFlashcard(event) {
     });
     const data = await res.json();
     console.log('data', data);
+    // infoMessage.textContent = 'Kort skapat';
   } catch (err) {
     console.error('Error creating collection', err);
   }

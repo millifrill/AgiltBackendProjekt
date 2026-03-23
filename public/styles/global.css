@@ -37,7 +37,7 @@
   --textLight: #f8f8f8;
   --textDark: #0d2944;
   --warn: rgb(182, 25, 25);
-  --info: rgb(0, 54, 0);
+  --info: rgb(28, 160, 28);
   --radius: 8px;
 }
 
@@ -315,13 +315,20 @@ a.button {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   border: 1px solid var(--primary);
   border-radius: var(--radius);
-  background-color: #fff;
+  background-color: #eef2f7;
   font-family: 'Poppins', 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.white-button:hover {
+  background-color: #dbe7f3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  transform: scale(1.02);
 }
 
 .input-div img {
