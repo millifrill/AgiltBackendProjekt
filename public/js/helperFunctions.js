@@ -308,7 +308,7 @@ export function validateUserInput({
     }
   }
 
-  if (userEmail.length > 1) {
+  if (userPassword.length > 1) {
     if (userPassword.length < 10) {
       errorMessage.textContent = 'Lösenordet måste vara minst 10 karaktärer';
       return false;
